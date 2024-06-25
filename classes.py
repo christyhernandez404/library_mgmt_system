@@ -84,14 +84,25 @@ class User:
         print(f"Name: {self.name}")
         print(f"Library ID: {self.library_id}")
 
-    def borrow_book(self, book):
-        if book.availability_status == "Available":
-            book.availability_status = "Borrowed"
-            self.borrowed_books.append(book)
-            print(f"{self.name} has borrowed {
-                book.title} and its status in the library catalog is now{book.availability_status}!")
-        else:
-            print("Book is unavailable right now. Please come by later")
+    def borrow_book(self, title):
+        for book in library_catalog.values():
+            if book.title.lower() == title.lower():
+                if book.availability_status == "Available":
+                    book.availability_status = "Borrowed"
+                    self.borrowed_books.append(book)
+                    print(f"{self.name} has borrowed {title} and its status in the library catalog is now{book.availability_status}!")
+                else:
+                    print("Book is unavailable right now. Please come by later")
+
+    def return_book(self, title):
+        for book in self.borrowed_books:
+            if book.title.lower()== title.lower():
+                print('second thing')
+                self.borrowed_books.remove(book)
+                book.availability_status = "Available"
+                print(f"{self.name} has returned {title} and its status in the library catalog is now {book.availability_status}!")
+            else:
+                print(f"{self.name} does not have this {book.title}")
 
 def display_user(library_id):
     for user in user_db.values():
@@ -112,14 +123,7 @@ def add_user(name):  # this function will  create an instance of the user class
 
 
 
-def return_book(self, book):
-    if book in self.borrowed_books:
-        self.borrowed_books.remove(book)
-        book.availability_status = "Available"
-        print(f"{self.name} has returned {
-            book.title} and its status in the library catalog is now {book.availability_status}!")
-    else:
-        print(f"{self.name} does not have this {book.title}")
+
 
 
 

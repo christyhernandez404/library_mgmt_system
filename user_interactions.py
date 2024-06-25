@@ -2,7 +2,9 @@ import time
 import os
 from classes import User
 from classes import user_db, library_catalog, author_catalog
-from classes import search_book_by_title, display_user, display_all_users, add_user, add_book,return_book, display_all_books,display_all_users,view_author,view_all_authors, add_new_author
+from classes import search_book_by_title, display_user, display_all_users, add_user, add_book, display_all_books,display_all_users,view_author,view_all_authors, add_new_author
+
+current_user = User("King James",99999)
 
 def clear():
     os.system('cls')
@@ -61,14 +63,12 @@ Enter the corresponding number for the action you'd like to take here: """)
             clear()
         elif ans == '2':
             title = input("Enter the title of the book you'd like to borrow: ")
-            User.borrow_book(library_catalog, title)
+            current_user.borrow_book(title)
             time.sleep(6)
-            clear()
         elif ans == '3':
             title = input("INput the book you are returning:")
-            return_book(library_catalog, title)
+            current_user.return_book(title)
             time.sleep(6)
-            clear()
         elif ans == '4':
             title = input("Enter the title of the book you'd like to search for: ")
             search_book_by_title(library_catalog, title)
